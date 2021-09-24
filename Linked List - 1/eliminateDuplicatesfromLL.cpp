@@ -31,26 +31,14 @@
 Node *removeDuplicates(Node *head)
 {
     if (head == NULL)
-        return head;
+        return NULL;
     
-    Node* prev = NULL;
-    Node* temp = head;
+    Node* temp = removeDuplicates(head -> next);
     
-    while (temp != NULL && temp -> next != NULL)
-    {
-        if (temp -> data == temp -> next -> data)
-        {
-            prev = temp;
-            while (temp -> next != NULL && temp -> data == temp -> next -> data)
-            {
-                temp = temp -> next;
-            }
-            
-            prev -> next = temp -> next;
-            prev = prev -> next;
-        }
-        temp = temp -> next;
-    }
+    if (temp != NULL && temp -> data == head -> data)
+        head -> next = temp -> next;
+    else
+    	head -> next = temp;
     
     return head;
 }
